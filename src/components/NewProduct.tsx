@@ -57,19 +57,21 @@ export default function NewProduct() {
 
     return (
         <div className="flex w-full flex-col">
-            <div className="flex items-center p-2 gap-2">
+            <div className="flex items-center p-2 gap-2 relative">
                 <Input
                     onFocus={() => setIsOpen(true)}
                     onBlur={onNameBlur}
-                    className="focus:border-b-0 border-0 border-b-2 border-primary" id="name" placeholder="Nieuw Product" value={name} onChange={handleNameChange} />
-                <PlusIcon className="text-primary" size={24} />
+                    className="focus:border-b-0 border-0 border-b-2 border-primary" id="name" placeholder="Nieuw Product" value={name} onChange={handleNameChange} >
+                </Input>
+
+                <PlusIcon className="absolute pointer-events-none right-3 text-primary" size={24} />
             </div>
             <motion.div
                 initial={{ height: 0 }}
                 animate={isOpen ? { height: "auto" } : { height: 0 }}
                 className="flex flex-col gap-2 overflow-hidden">
                 <div className="flex flex-col gap-2 p-2">
-                    <Input id="amount" placeholder="Hoeveelheid" value={amount} onChange={handleAmountChange} />
+                    <Input id="amount" placeholder="Hoeveelheid (optioneel)" value={amount} onChange={handleAmountChange} />
                     <Textarea id="notes" placeholder="Notities (optioneel)" value={notes ? notes : ""} onChange={handleNotesChange} />
                     <div className="flex gap-3">
                         <Button onClick={onClose} variant={"outline"}>Annuleren</Button>

@@ -34,6 +34,7 @@ export async function updateProductInDatabase(id: string, product: Product): Pro
     const body = {
         id,
         name: product.name,
+        amount: product.amount,
         completed: product.completed,
         notes: product.notes,
     }

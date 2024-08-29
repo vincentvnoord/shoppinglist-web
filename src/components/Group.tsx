@@ -11,7 +11,7 @@ export default function ProductGroup({ completed = false }: { completed?: boolea
         for (let i = 0; i < products.length; i++) {
             if (products[i].completed) {
                 if (products[i].latestUIEvent) {
-                    updateProduct(products[i].id, { latestUIEvent: undefined });
+                    updateProduct(products[i].id, { ...products[i], latestUIEvent: undefined });
                 }
                 filteredProducts.unshift(products[i]);
             }
@@ -28,9 +28,14 @@ export default function ProductGroup({ completed = false }: { completed?: boolea
         }
     }
 
+    if(filteredProducts.length === 0) {
+        const text = completed ? "Je hebt nog geen producten voltooid!" : "Je lijstje is leeg!";
+        return <p className="text-muted-foreground flex items-center h-full">{text}</p>
+    }
+
     return (
         <div className="flex w-full flex-col gap-1">
-            <ul className="flex flex-col gap-2 pl-2 pr-2">
+            <ul className="flex flex-col gap-1 pl-2 pr-2">
                 {filteredProducts.map((product, index) => (
                     <ProductCard key={product.id} product={product} index={index} />
                 ))}

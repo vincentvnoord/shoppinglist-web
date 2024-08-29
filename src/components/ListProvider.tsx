@@ -11,7 +11,7 @@ type ListContextType = {
     products: Product[];
     addProduct: (product: Product) => void;
     removeProduct: (id: string) => void;
-    updateProduct: (id: string, product: Partial<Product>) => void;
+    updateProduct: (id: string, product: Product) => void;
 }
 
 const ListContext = React.createContext<ListContextType>({
