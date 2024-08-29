@@ -5,6 +5,7 @@ import { Button } from "./ui/button"
 import { useState } from "react";
 import { API_URL } from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { createList } from "@/actions/listActions";
 
 export const HomeActions = () => {
     const router = useRouter();
@@ -20,21 +21,14 @@ export const HomeActions = () => {
 
         setLoading(true);
 
-        const response = await fetch(API_URL + "/list", {
-            method: "POST",
-            body: JSON.stringify({ name: newName }),
-        });
-
-        if (!response.ok) {
-            response.text().then(console.error);
+        try {
+            const public_code = await createList(newName);
+            router.push("/" + public_code + "/list");
+        } catch (e) {
+            console.error(e);
+        } finally {
             setLoading(false);
-        } else {
-            const data = await response.json();
-            console.log(data);
-            router.push("/" + data.public_code + "/list");
         }
-
-        setLoading(false);
     }
 
     return (
