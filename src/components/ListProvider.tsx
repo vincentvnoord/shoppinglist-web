@@ -4,6 +4,7 @@ import { API_URL } from "@/lib/api";
 import { list } from "postcss";
 import React, { useContext } from "react"
 import { json } from "stream/consumers";
+import { addProductToDatabase, updateProductInDatabase } from "@/actions/productActions";
 
 type ListContextType = {
     list: List;
@@ -21,53 +22,6 @@ const ListContext = React.createContext<ListContextType>({
     updateProduct: () => { },
 });
 
-async function addProductToDatabase(listID: number, product: Product): Promise<Response> {
-    const body = {
-        list_id: listID,
-        product: {
-            name: product.name,
-            amount: product.amount,
-            notes: product.notes,
-        }
-    }
-
-    console.log(JSON.stringify(body));
-
-    const response = await fetch(API_URL + "/product", {
-        method: "POST",
-        body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-        const data = await response.text();
-        throw new Error("Failed to save product: " + data);
-    }
-
-    return response;
-}
-
-async function updateProductInDatabase(id: string, product: Product): Promise<Response> {
-    const body = {
-        id,
-        name: product.name,
-        completed: product.completed,
-        notes: product.notes,
-    }
-
-    console.log(JSON.stringify(body));
-
-    const response = await fetch(API_URL + "/product", {
-        method: "PUT",
-        body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-        const data = await response.text();
-        throw new Error("Failed to save product: " + data);
-    }
-
-    return response;
-}
 
 export const ListStateProvider = ({ children, initialProducts, initialList }: { children: React.ReactNode, initialProducts?: Product[], initialList?: List }) => {
     const [list, setList] = React.useState<List>(initialList ?? { id: 0, name: "" });
@@ -79,7 +33,7 @@ export const ListStateProvider = ({ children, initialProducts, initialList }: { 
 
         try {
             const response = await addProductToDatabase(list.id, product);
-            const data = await response.json();
+            if (!response) throw new Error("Failed to save product");
         } catch (error) {
             console.log(error);
             setProducts(products.filter(p => p.id !== product.id));
