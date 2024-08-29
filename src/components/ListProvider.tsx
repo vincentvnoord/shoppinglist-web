@@ -33,7 +33,6 @@ export const ListStateProvider = ({ children, initialProducts, initialList }: { 
 
         try {
             const response = await addProductToDatabase(list.id, product);
-            if (!response) throw new Error("Failed to save product");
         } catch (error) {
             console.log(error);
             setProducts(products.filter(p => p.id !== product.id));

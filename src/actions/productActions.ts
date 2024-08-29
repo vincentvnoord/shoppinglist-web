@@ -17,6 +17,9 @@ export async function addProductToDatabase(listID: number, product: Product): Pr
     const response = await fetch(API_URL + "/product", {
         method: "POST",
         body: JSON.stringify(body),
+        headers: {
+            "Content-Type": "application/json",
+        }
     });
 
     if (!response.ok) {
@@ -40,6 +43,9 @@ export async function updateProductInDatabase(id: string, product: Product): Pro
     const response = await fetch(API_URL + "/product", {
         method: "PUT",
         body: JSON.stringify(body),
+        headers: {
+            "Content-Type": "application/json",
+        }
     });
 
     if (!response.ok) {

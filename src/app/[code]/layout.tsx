@@ -34,7 +34,7 @@ export default async function GroceryListLayout({ children, params }: { children
         )
     }
 
-    const productsResponse = await fetch(API_URL + "/products/" + list.id);
+    const productsResponse = await fetch(API_URL + "/products/" + list.id, { cache: "no-cache"});
     let products: Product[] = [];
     if (productsResponse.ok) {
         const data = await productsResponse.json();
