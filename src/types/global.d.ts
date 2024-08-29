@@ -8,8 +8,8 @@ type Product = {
     name: string;
     amount: string;
     notes?: string;
-    completed: boolean = false;
-    latestUIEvent?: ProductUserEvent | null = null;
+    completed: boolean;
+    latestUIEvent?: ProductUserEvent | null;
 }
 
 type ProductUserEvent = {
