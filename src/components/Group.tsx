@@ -1,6 +1,6 @@
 "use client";
 
-import useProducts from "./ProductListProvider"
+import useProducts from "./ListProvider"
 import { ProductCard } from "./Product";
 
 export default function ProductGroup({ completed = false }: { completed?: boolean }) {
@@ -13,7 +13,7 @@ export default function ProductGroup({ completed = false }: { completed?: boolea
                 if (products[i].latestUIEvent) {
                     updateProduct(products[i].id, { latestUIEvent: undefined });
                 }
-                filteredProducts.push(products[i]);
+                filteredProducts.unshift(products[i]);
             }
         }
     } else {
@@ -30,7 +30,7 @@ export default function ProductGroup({ completed = false }: { completed?: boolea
 
     return (
         <div className="flex w-full flex-col gap-1">
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 pl-2 pr-2">
                 {filteredProducts.map((product, index) => (
                     <ProductCard key={product.id} product={product} index={index} />
                 ))}

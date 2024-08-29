@@ -3,7 +3,7 @@
 import { PlusIcon } from "lucide-react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import useProducts from "./ProductListProvider";
+import useProducts from "./ListProvider";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
@@ -36,7 +36,7 @@ export default function NewProduct() {
     }
 
     const handleAddProduct = () => {
-        if (name === "" || amount === "") return;
+        if (name === "") return;
 
         addProduct({
             id: Math.random().toString(36).substring(7),

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ShoppingCart, CheckCircle } from 'lucide-react';
-import useProducts from './ProductListProvider';
+import useProducts from './ListProvider';
 import { motion } from 'framer-motion';
 
 function getProductCounts(products: Product[]) {

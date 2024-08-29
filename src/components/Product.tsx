@@ -2,7 +2,7 @@
 
 import { Check, CheckIcon, ChevronDown, ChevronLeft, DessertIcon, Droplets, EllipsisVertical, FileCheck, InfoIcon, MenuIcon, Notebook, NotebookIcon, NotepadText, XIcon } from "lucide-react"
 import { easeInOut, motion, stagger, useInView } from "framer-motion"
-import useProducts from "./ProductListProvider";
+import useProducts from "./ListProvider";
 import React, { useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { easeIn } from "framer-motion/dom";

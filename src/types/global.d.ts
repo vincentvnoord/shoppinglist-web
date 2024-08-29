@@ -1,3 +1,8 @@
+type List = {
+    id: number;
+    name: string;
+}
+
 type Product = {
     id: string;
     name: string;
